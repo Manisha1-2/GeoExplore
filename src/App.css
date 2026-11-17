@@ -1,0 +1,173 @@
+
+/* GLOBAL STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7f6;
+  color: #26352f;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 70px;
+  background: #123b32;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid #285548;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.logo h2 {
+  font-size: 23px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #a7e3c6;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* FILTER SECTION */
+.filter-section {
+  width: 100%;
+  background: #ffffff;
+  padding: 22px 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border-bottom: 1px solid #e0e7e3;
+}
+
+.filter-heading h2 {
+  color: #176b50;
+  font-size: 21px;
+  margin-bottom: 6px;
+}
+
+.filter-heading p {
+  color: #64746c;
+  font-size: 13px;
+}
+
+/* FILTER CONTROLS */
+.filter-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 210px;
+}
+
+.filter-group label {
+  color: #34483e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #cbd7d0;
+  border-radius: 7px;
+  color: #26352f;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  border-color: #176b50;
+  box-shadow: 0 0 0 3px rgba(23, 107, 80, 0.12);
+}
+
+/* MAP SECTION */
+.map-section {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  padding: 16px;
+}
+
+.map-section .leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 15px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    gap: 18px;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .filter-group {
+    min-width: 100%;
+  }
+
+  .map-section {
+    min-height: 350px;
+  }
+}
