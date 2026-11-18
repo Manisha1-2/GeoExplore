@@ -1,6 +1,4 @@
-
 import { useState, useEffect } from "react";
-
 import {
   MapContainer,
   TileLayer,
@@ -28,6 +26,7 @@ function MapClickHandler({ onMapClick }) {
 
 // Automatically adjust map to filtered locations
 function FitMapToPlaces({ places }) {
+
   const map = useMap();
 
   useEffect(() => {
@@ -47,7 +46,25 @@ function FitMapToPlaces({ places }) {
   return null;
 }
 
-function MapView({ places = [] }) {
+// Zoom to the selected location
+function ZoomToSelectedPlace({ selectedPlace }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedPlace) {
+      map.flyTo(
+        [selectedPlace.lat, selectedPlace.lng],
+        15,
+        { duration: 1.5 }
+      );
+    }
+  }, [selectedPlace, map]);
+
+  return null;
+}
+
+
+function MapView({ places = [], selectedPlace }) {
   const [position, setPosition] = useState(null);
 
   return (
@@ -65,6 +82,8 @@ function MapView({ places = [] }) {
       <MapClickHandler onMapClick={setPosition} />
 
       <FitMapToPlaces places={places} />
+
+      <ZoomToSelectedPlace selectedPlace={selectedPlace} />
 
       {places.map((place) => (
         <Marker
