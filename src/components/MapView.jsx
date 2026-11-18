@@ -1,10 +1,12 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 
 import {
   MapContainer,
   TileLayer,
   Marker,
   Popup,
+  useMap,
   useMapEvents,
 } from "react-leaflet";
 
@@ -24,7 +26,28 @@ function MapClickHandler({ onMapClick }) {
   return null;
 }
 
-function MapView() {
+// Automatically adjust map to filtered locations
+function FitMapToPlaces({ places }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (places.length > 0) {
+      const bounds = places.map((place) => [
+        place.lat,
+        place.lng,
+      ]);
+
+      map.fitBounds(bounds, {
+        padding: [50, 50],
+        maxZoom: 12,
+      });
+    }
+  }, [places, map]);
+
+  return null;
+}
+
+function MapView({ places = [] }) {
   const [position, setPosition] = useState(null);
 
   return (
@@ -32,13 +55,30 @@ function MapView() {
       center={[27.6298, 85.5214]}
       zoom={12}
       style={{ height: "500px", width: "100%" }}
+      dragging={true}
     >
       <TileLayer
-        attribution='&copy; OpenStreetMap contributors'
+        attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
       <MapClickHandler onMapClick={setPosition} />
+
+      <FitMapToPlaces places={places} />
+
+      {places.map((place) => (
+        <Marker
+          key={place.name}
+          position={[place.lat, place.lng]}
+        >
+          <Popup>
+            <h3>{place.name}</h3>
+            <p>District: {place.district}</p>
+            <p>Latitude: {place.lat}</p>
+            <p>Longitude: {place.lng}</p>
+          </Popup>
+        </Marker>
+      ))}
 
       {position && (
         <Marker position={position}>

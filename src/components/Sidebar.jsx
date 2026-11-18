@@ -36,7 +36,7 @@ function Sidebar({
           >
             <option value="All">All Districts</option>
             <option value="Kavre">Kavre</option>
-            <option value="Sindhupalchok">
+            <option value="Sindhupalchowk">
               Sindhupalchowk
             </option>
           </select>
