@@ -178,3 +178,41 @@ body {
     min-height: 350px;
   }
 }
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.marker-dot {
+  width: 30px;
+  height: 26px;
+  background-color: pink;
+  border: 4px solid red;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.marker-dot:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+}
+
+.marker-diamond{
+  color:red;
+  font-size: 30px;
+  line-height: 32px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  transform: translateY(-8px);
+  text-shadow:
+  -1px -1px 0 white,
+   1px -1px 0 white,
+  -1px  1px 0 white,
+   1px  1px 0 white;
+}
+
+.marker-diamond:hover {
+  transform: scale(1.3);
+}

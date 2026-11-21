@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { divIcon } from "leaflet";
 import {
   MapContainer,
   TileLayer,
@@ -25,11 +26,14 @@ function MapClickHandler({ onMapClick }) {
 }
 
 // Automatically adjust map to filtered locations
-function FitMapToPlaces({ places }) {
 
+function FitMapToPlaces({ places, selectedPlace }) {
   const map = useMap();
 
   useEffect(() => {
+    // Don't fit all places when one location is selected
+    if (selectedPlace) return;
+
     if (places.length > 0) {
       const bounds = places.map((place) => [
         place.lat,
@@ -41,10 +45,11 @@ function FitMapToPlaces({ places }) {
         maxZoom: 12,
       });
     }
-  }, [places, map]);
+  }, [places, selectedPlace, map]);
 
   return null;
 }
+
 
 // Zoom to the selected location
 function ZoomToSelectedPlace({ selectedPlace }) {
@@ -63,6 +68,12 @@ function ZoomToSelectedPlace({ selectedPlace }) {
   return null;
 }
 
+const customMarker = divIcon({
+  className: "custom-marker",
+ html: `<div class="marker-diamond">◆</div>`,
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+});
 
 function MapView({ places = [], selectedPlace }) {
   const [position, setPosition] = useState(null);
@@ -81,7 +92,10 @@ function MapView({ places = [], selectedPlace }) {
 
       <MapClickHandler onMapClick={setPosition} />
 
-      <FitMapToPlaces places={places} />
+      <FitMapToPlaces
+  places={places}
+  selectedPlace={selectedPlace}
+/>
 
       <ZoomToSelectedPlace selectedPlace={selectedPlace} />
 
@@ -89,6 +103,7 @@ function MapView({ places = [], selectedPlace }) {
         <Marker
           key={place.name}
           position={[place.lat, place.lng]}
+           icon={customMarker}
         >
           <Popup>
             <h3>{place.name}</h3>
