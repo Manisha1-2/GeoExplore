@@ -1,39 +1,50 @@
 
-/* GLOBAL STYLES */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* =================================
+   MAIN GIS THEME
+================================= */
+
+:root {
+  --primary: #176b50;
+  --primary-dark: #123b32;
+  --primary-light: #e5f3ec;
+  --page-bg: #eef3f1;
+  --surface: #ffffff;
+  --text-main: #263b35;
+  --text-muted: #718078;
+  --border: #dce6e0;
+  --shadow: 0 4px 18px rgba(28, 59, 45, 0.08);
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f7f6;
-  color: #26352f;
-  overflow-x: hidden ;
-  overflow: auto;
-}
+/* =================================
+   NAVBAR
+================================= */
 
-/* NAVBAR */
 .navbar {
-  height: 70px;
-  background: #123b32;
+  min-height: 72px;
+  background: var(--primary-dark);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   border-bottom: 1px solid #285548;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 1000;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #ffffff;
+  gap: 12px;
+  color: white;
 }
 
 .logo h2 {
   font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: white;
 }
 
 .nav-links {
@@ -45,52 +56,64 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #ffffff;
-  font-size: 15px;
+  color: #e3eee8;
+  font-size: 14px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .nav-links a:hover {
   color: #a7e3c6;
 }
 
-/* MAIN CONTENT */
+/* =================================
+   MAIN CONTENT
+================================= */
+
 .main-content {
-  min-height: calc(100vh - 70px);
+  flex: 1;
+  min-height: calc(100vh - 72px);
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  background: var(--page-bg);
 }
 
-/* FILTER SECTION */
+/* =================================
+   FILTER SECTION
+================================= */
+
 .filter-section {
   width: 100%;
-  background: #ffffff;
-  padding: 22px 35px;
+  background: var(--surface);
+  padding: 24px 35px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  border-bottom: 1px solid #e0e7e3;
+  border-bottom: 1px solid var(--border);
 }
 
 .filter-heading h2 {
-  color: #176b50;
-  font-size: 21px;
-  margin-bottom: 6px;
+  color: var(--primary-dark);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 7px;
 }
 
 .filter-heading p {
-  color: #64746c;
+  color: var(--text-muted);
   font-size: 13px;
+  line-height: 1.5;
 }
 
-/* FILTER CONTROLS */
+/* =================================
+   FILTER CONTROLS
+================================= */
+
 .filter-controls {
   display: flex;
   align-items: flex-end;
-  gap: 20px;
+  gap: 18px;
 }
 
 .filter-group {
@@ -101,52 +124,178 @@ body {
 }
 
 .filter-group label {
-  color: #34483e;
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 650;
 }
 
 .filter-group select {
   width: 100%;
   padding: 12px 14px;
-  background: #ffffff;
-  border: 1px solid #cbd7d0;
-  border-radius: 7px;
-  color: #26352f;
+  background: #f9fbfa;
+  border: 1px solid #d3dfd8;
+  border-radius: 9px;
+  color: var(--text-main);
   font-size: 14px;
   outline: none;
-  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-group select:hover {
+  border-color: #8bbba2;
 }
 
 .filter-group select:focus {
-  border-color: #176b50;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(23, 107, 80, 0.12);
 }
 
-/* MAP SECTION */
+/* =================================
+   MAP WORKSPACE
+================================= */
+
 .map-section {
   flex: 1;
   min-height: 600px;
   min-width: 0;
-  padding: 16px;
+  height: 680px;
+  padding: 22px 26px;
+  background: var(--page-bg);
 }
 
 .map-section .leaflet-container {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
+  min-height: 550px;
+  border: 2px solid #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
   z-index: 1;
   cursor: grab;
+  box-shadow:
+    0 5px 20px rgba(25, 54, 41, 0.10),
+    0 1px 4px rgba(25, 54, 41, 0.08);
 }
 
 .map-section .leaflet-container:active {
   cursor: grabbing;
 }
 
-/* RESPONSIVE DESIGN */
+/* MAP ZOOM CONTROLS */
+
+.leaflet-control-zoom {
+  border: none !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-control-zoom a {
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  color: var(--primary-dark) !important;
+  background: white !important;
+  border-bottom: 1px solid #e5ebe7 !important;
+  transition: background 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+/* MAP POPUPS */
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.13) !important;
+}
+
+.leaflet-popup-content {
+  color: var(--text-main);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+}
+
+/* MAP ATTRIBUTION */
+
+.leaflet-control-attribution {
+  font-size: 10px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 6px 0 0 0;
+}
+
+/* =================================
+   CUSTOM LOCATION MARKERS
+================================= */
+
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.marker-dot {
+  width: 30px;
+  height: 26px;
+  background-color: #f9a8d4;
+  border: 3px solid #be185d;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.marker-dot:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba(190, 24, 93, 0.5);
+}
+
+.marker-diamond {
+  color: #176b50;
+  font-size: 30px;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  transform: translateY(-8px);
+  transition: transform 0.25s ease;
+  text-shadow:
+    -1px -1px 0 white,
+     1px -1px 0 white,
+    -1px  1px 0 white,
+     1px  1px 0 white;
+}
+
+.marker-diamond:hover {
+  transform: translateY(-8px) scale(1.3);
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 900px) {
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    flex: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
-    padding: 0 15px;
+    padding: 0 16px;
+    min-height: 65px;
+  }
+
+  .logo h2 {
+    font-size: 19px;
   }
 
   .nav-links {
@@ -154,12 +303,10 @@ body {
   }
 
   .nav-links a {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .filter-section {
-    flex-direction: column;
-    align-items: stretch;
     padding: 20px;
     gap: 18px;
   }
@@ -175,44 +322,17 @@ body {
   }
 
   .map-section {
-    min-height: 350px;
+    min-height: 450px;
+    height: 520px;
+    padding: 14px;
+  }
+
+  .map-section .leaflet-container {
+    min-height: 420px;
+    border-radius: 12px;
   }
 }
-.custom-marker {
-  background: transparent;
-  border: none;
-}
 
-.marker-dot {
-  width: 30px;
-  height: 26px;
-  background-color: pink;
-  border: 4px solid red;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.marker-dot:hover {
-  transform: scale(1.3);
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
-}
 
-.marker-diamond{
-  color:red;
-  font-size: 30px;
-  line-height: 32px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  transform: translateY(-8px);
-  text-shadow:
-  -1px -1px 0 white,
-   1px -1px 0 white,
-  -1px  1px 0 white,
-   1px  1px 0 white;
-}
 
-.marker-diamond:hover {
-  transform: scale(1.3);
-}
